@@ -1,0 +1,73 @@
+%!TeX program = xelatex
+\documentclass[12pt,hyperref,a4paper,UTF8]{ctexart}
+\usepackage{CIAEReport}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{indentfirst}
+
+% 参考文献格式
+\usepackage[backend=biber,
+style=chinese-law,     % 脚注格式符合法学引注手册
+gbfootbib=true,
+gbnamefmt=familyahead
+]{biblatex}
+
+%页面设置
+%%各级标题设置
+%\ctexset{chapter={name={第,章},number={\chinese{chapter}}}}
+\ctexset{section={name={,、},number={\chinese{section}},format=\heiti\centering\zihao{2},aftername=\hspace{0pt}}}
+\ctexset{subsection={name={(,)},number={\chinese{subsection}},format=\heiti\raggedright\zihao{-3},aftername=\hspace{0pt}}}
+\ctexset{
+  subsubsection={
+    name={}, % 名称为空，不显示"第"和"节"等字样
+    number={\arabic{subsubsection}}, % 使用阿拉伯数字编号
+    format={\heiti\zihao{4}}, % 设置为黑体四号
+    aftername={.\ } % 编号后加一个点和空格
+  }
+}
+\ctexset{paragraph={name={(,)},number={paragraph}}}
+\setlength{\parindent}{2em}
+% 在导言区设置目录深度为2（只显示section和subsection）
+\setcounter{tocdepth}{2}
+%%加入参考文献库
+\addbibresource{reference.bib}
+%%-------------------------------正文开始---------------------------%%
+\begin{document}
+
+%%-----------------------封面--------------------%%
+\cover
+\thispagestyle{empty}
+%%----------------------摘要------------------------%%
+\maketitle
+\newpage
+% \begin{center}
+%     \title{ \zihao{2}{\textbf{{宪法学论文}}}}
+% \end{center}
+\setlength{\parskip}{18pt}
+\par \heiti{\zihao{-4}{摘\quad 要:}}\songti{
+民诉法论文
+}
+
+\heiti{关键词：}\songti{物权法论文} %三到五个，尽量准确
+
+\setlength{\parskip}{0pt}
+\thispagestyle{empty} % 首页不显示页码
+
+%%--------------------------目录页------------------------%%
+\newpage
+\tableofcontents
+\thispagestyle{empty} % 目录不显示页码
+
+%%------------------------正文页从这里开始-------------------%
+\newpage
+\setcounter{page}{1} % 让页码从正文开始编号
+
+%%可选择这里也放一个标题%%
+\input{body.tex}
+%%--------------------------参考文献------------------------%%
+\newpage
+\nocite{*}
+\printbibliography
+\addcontentsline{toc}{section}{\textbf{参考文献}}
+
+\end{document}
